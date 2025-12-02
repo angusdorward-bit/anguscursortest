@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Francisco Jogging Tours</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #ffe5b4 !important; /* warm golden/orange tone */
+            position: relative;
+        }
+        body.dark-mode {
+            background-color: #1a1a1a !important;
+        }
+        .stats-section {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem auto 2rem auto;
+            max-width: 900px;
+        }
+        .stat-box {
+            background: #fffbe8;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 1.5rem 2rem;
+            min-width: 180px;
+            text-align: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            border: 2px solid #FFD399;
+            flex: 1 1 160px;
+            transition: all 0.3s ease;
+        }
+        body.dark-mode .stat-box {
+            background: #2d2d2d;
+            border-color: #4a4a4a;
+            color: #e0e0e0;
+        }
+        .stat-figure {
+            font-size: 2.3rem;
+            font-weight: bold;
+            color: #e19628;
+            margin-bottom: .3em;
+            line-height: 1.1;
+            display: block;
+        }
+        .stat-label {
+            font-size: 1.01rem;
+            color: #9D6B2D;
+            letter-spacing: 0.04em;
+        }
+        @media (max-width: 750px) {
+            .stats-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rain-container" id="rainContainer"></div>
+    
+    <!-- Ambient Music Player -->
+    <div class="music-player">
+        <audio id="ambientMusic" loop>
+            <source src="ambient-music.mp3" type="audio/mpeg">
+            <source src="ambient-music.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+        </audio>
+        <button class="music-toggle" id="musicToggle" aria-label="Toggle ambient music">
+            <span class="music-icon">🎵</span>
+            <span class="music-label">Ambient Music</span>
+        </button>
+        <div class="music-volume-control">
+            <input type="range" id="volumeSlider" min="0" max="100" value="50" aria-label="Volume control">
+        </div>
+    </div>
+    
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <button class="dark-mode-button" id="darkModeButton" aria-label="Toggle dark mode">
+            <span class="dark-mode-icon">🌙</span>
+            <span class="dark-mode-label">Dark Mode</span>
+        </button>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">SF Jogging Tours</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">San Francisco Jogging Tours</h1>
+            <p class="hero-subtitle">Explore the City by the Bay, One Step at a Time</p>
+        </div>
+    </header>
+
+    <!-- Highlight Stats Section: now right after hero and before main content -->
+    <section class="stats-section">
+        <div class="stat-box">
+            <span class="stat-figure">700</span>
+            <span class="stat-label">Tour miles<br/>ran this year</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-figure">100%</span>
+            <span class="stat-label">Tour survival<br/>rate</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-figure">4.8 <span style="color:#FFD700;">★</span></span>
+            <span class="stat-label">Stars on Yelp</span>
+        </div>
+    </section>
+    <!-- End Highlight Stats Section -->
+
+    <main>
+        <section class="intro-section">
+            <div class="container">
+                <h2>Discover San Francisco's Most Scenic Running Routes</h2>
+                <p class="intro-text">
+                    See San Francisco from a local's perspective.
+                    From iconic landmarks to hidden coastal trails, we've curated the perfect routes for every runner at any skill level.
+                    Run like a local, see like a local, and experience San Francisco like never before.
+            </div>
+        </section>
+
+        <!-- Routes Section -->
+        <section class="routes-section">
+            <div class="container">
+                <h2 class="section-title">Our Running Routes</h2>
+                <div class="routes-grid">
+
+                    <!-- Golden Gate Bridge Loop -->
+                    <div class="route-card">
+                        <div class="route-icon">🌉</div>
+                        <h3 class="route-name">Golden Gate Bridge Loop</h3>
+                        <p class="route-time"><span class="time-icon">⏱</span> 45 minutes</p>
+                        <button class="dropdown-toggle" aria-expanded="false">
+                            <span>View Landmarks</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <h4>Key Landmarks:</h4>
+                            <ul class="landmarks-list">
+                                <li>
+                                    <strong>
+                                        <a href="https://en.wikipedia.org/wiki/Golden_Gate_Bridge" target="_blank" rel="noopener noreferrer">
+                                            <i class="fa-solid fa-bridge"></i> Golden Gate Bridge
+                                        </a>
+                                    </strong>
+                                    <p>Iconic 1.7-mile suspension bridge connecting San Francisco to Marin County, offering stunning panoramic views.</p>
+                                </li>
+                                <li>
+                                    <strong>
+                                        <a href="https://en.wikipedia.org/wiki/Crissy_Field" target="_blank" rel="noopener noreferrer">
+                                            <i class="fa-solid fa-tree-city"></i> Crissy Field
+                                        </a>
+                                    </strong>
+                                    <p>Scenic waterfront park with restored wetlands, perfect for running along the bay with bridge views.</p>
+                                </li>
+                                <li>
+                                    <strong>
+                                        <a href="https://en.wikipedia.org/wiki/Fort_Point,_San_Francisco" target="_blank" rel="noopener noreferrer">
+                                            <i class="fa-solid fa-landmark"></i> Fort Point National Historic Site
+                                        </a>
+                                    </strong>
+                                    <p>Historic Civil War-era fort nestled directly under the Golden Gate Bridge, providing unique architectural views.</p>
+                                </li>
+                                <li>
+                                    <strong>
+                                        <a href="https://en.wikipedia.org/wiki/Battery_Spencer" target="_blank" rel="noopener noreferrer">
+                                            <i class="fa-solid fa-binoculars"></i> Battery Spencer
+                                        </a>
+                                    </strong>
+                                    <p>Historic military battery offering one of the best panoramic views of the Golden Gate Bridge and city skyline.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Pacific_Ocean" target="_blank" rel="noopener noreferrer">🌊 Pacific Ocean Views</a></strong>
+                                    <p>Spectacular coastal vistas with crashing waves, rocky cliffs, and marine wildlife sightings.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Crissy Field to Fort Point -->
+                    <div class="route-card">
+                        <div class="route-icon">🏃</div>
+                        <h3 class="route-name">Crissy Field to Fort Point</h3>
+                        <p class="route-time"><span class="time-icon">⏱</span> 30 minutes</p>
+                        <button class="dropdown-toggle" aria-expanded="false">
+                            <span>View Landmarks</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <h4>Key Landmarks:</h4>
+                            <ul class="landmarks-list">
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Crissy_Field" target="_blank" rel="noopener noreferrer">🏃 Crissy Field Beach</a></strong>
+                                    <p>Beautiful sandy beach with direct views of the Golden Gate Bridge, popular for jogging and beach activities.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Fort_Point,_San_Francisco" target="_blank" rel="noopener noreferrer">🏰 Fort Point National Historic Site</a></strong>
+                                    <p>Historic brick fortification built in 1861, offering unique perspective directly under the Golden Gate Bridge.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Golden_Gate_Bridge" target="_blank" rel="noopener noreferrer">🌉 Golden Gate Bridge (underneath)</a></strong>
+                                    <p>Rare view from beneath the bridge's massive structure, showcasing its impressive engineering and scale.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/San_Francisco_Bay" target="_blank" rel="noopener noreferrer">🌊 San Francisco Bay</a></strong>
+                                    <p>Calm bay waters with views of Alcatraz Island and the city skyline in the distance.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Marina_District,_San_Francisco" target="_blank" rel="noopener noreferrer">🏞️ Marina Green</a></strong>
+                                    <p>Expansive grassy park perfect for running, with waterfront views and picnic areas.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Marina Green to Palace of Fine Arts -->
+                    <div class="route-card">
+                        <div class="route-icon">🏛️</div>
+                        <h3 class="route-name">Marina Green to Palace of Fine Arts</h3>
+                        <p class="route-time"><span class="time-icon">⏱</span> 25 minutes</p>
+                        <button class="dropdown-toggle" aria-expanded="false">
+                            <span>View Landmarks</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <h4>Key Landmarks:</h4>
+                            <ul class="landmarks-list">
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Palace_of_Fine_Arts" target="_blank" rel="noopener noreferrer">🏛️ Palace of Fine Arts</a></strong>
+                                    <p>Beautiful Greco-Roman inspired structure with a serene lagoon, originally built for the 1915 Panama-Pacific Exposition.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Marina_District,_San_Francisco" target="_blank" rel="noopener noreferrer">🏞️ Marina Green</a></strong>
+                                    <p>Large waterfront park with pristine grass fields, perfect for running and outdoor activities.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Marina_District,_San_Francisco" target="_blank" rel="noopener noreferrer">⛵ Yacht Harbor</a></strong>
+                                    <p>Picturesque marina filled with sailboats and yachts, creating a peaceful coastal atmosphere.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Golden_Gate_Bridge" target="_blank" rel="noopener noreferrer">🌉 Golden Gate Bridge Views</a></strong>
+                                    <p>Distant but stunning views of the iconic bridge across the bay, especially beautiful at sunset.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Marina_District,_San_Francisco" target="_blank" rel="noopener noreferrer">🌳 Marina District</a></strong>
+                                    <p>Charming neighborhood with tree-lined streets, historic architecture, and vibrant local culture.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Presidio Coastal Trail -->
+                    <div class="route-card">
+                        <div class="route-icon">🌊</div>
+                        <h3 class="route-name">Presidio Coastal Trail</h3>
+                        <p class="route-time"><span class="time-icon">⏱</span> 75 minutes</p>
+                        <button class="dropdown-toggle" aria-expanded="false">
+                            <span>View Landmarks</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <h4>Key Landmarks:</h4>
+                            <ul class="landmarks-list">
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Baker_Beach" target="_blank" rel="noopener noreferrer">🏖️ Baker Beach</a></strong>
+                                    <p>Scenic 1-mile beach with stunning views of the Golden Gate Bridge, perfect for coastal running.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Golden_Gate_Bridge" target="_blank" rel="noopener noreferrer">🌉 Golden Gate Bridge</a></strong>
+                                    <p>Iconic bridge visible throughout the trail, offering multiple vantage points for photography and admiration.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Presidio_of_San_Francisco" target="_blank" rel="noopener noreferrer">🏰 Presidio of San Francisco</a></strong>
+                                    <p>Former military base turned national park, featuring historic buildings and beautiful green spaces.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Sequoia_sempervirens" target="_blank" rel="noopener noreferrer">🌲 Coastal Redwoods</a></strong>
+                                    <p>Majestic old-growth redwood trees creating shaded pathways and a serene forest atmosphere.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Pacific_Ocean" target="_blank" rel="noopener noreferrer">🌊 Pacific Ocean</a></strong>
+                                    <p>Expansive ocean views with dramatic cliffs, rocky shores, and the sound of crashing waves.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Presidio_of_San_Francisco" target="_blank" rel="noopener noreferrer">🏞️ Presidio National Park</a></strong>
+                                    <p>1,500-acre park with diverse landscapes including forests, meadows, and coastal bluffs.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Embarcadero Waterfront -->
+                    <div class="route-card">
+                        <div class="route-icon">⛵</div>
+                        <h3 class="route-name">Embarcadero Waterfront</h3>
+                        <p class="route-time"><span class="time-icon">⏱</span> 40 minutes</p>
+                        <button class="dropdown-toggle" aria-expanded="false">
+                            <span>View Landmarks</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <h4>Key Landmarks:</h4>
+                            <ul class="landmarks-list" style="max-height:220px; overflow-y:auto; padding-right:10px;">
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/San_Francisco_Ferry_Building" target="_blank" rel="noopener noreferrer">🚢 Ferry Building</a></strong>
+                                    <p>Historic terminal, food stalls.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Pier_39" target="_blank" rel="noopener noreferrer">🎡 Pier 39</a></strong>
+                                    <p>Shops & sea lions.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Alcatraz_Island" target="_blank" rel="noopener noreferrer">🏝️ Alcatraz Island</a></strong>
+                                    <p>Legendary former prison island, visible from the Embarcadero.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Exploratorium" target="_blank" rel="noopener noreferrer">🔬 Exploratorium</a></strong>
+                                    <p>Hands-on science museum located at Pier 15, popular for all ages.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Cupid%27s_Span" target="_blank" rel="noopener noreferrer">🏹 Cupid's Span</a></strong>
+                                    <p>Iconic bow-and-arrow sculpture by the waterfront park.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Muir Woods -->
+                    <div class="route-card">
+                        <div class="route-icon">🌲</div>
+                        <h3 class="route-name">Muir Woods</h3>
+                        <p class="route-time"><span class="time-icon">⏱</span> 60 minutes</p>
+                        <button class="dropdown-toggle" aria-expanded="false">
+                            <span>View Landmarks</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <h4>Key Landmarks:</h4>
+                            <ul class="landmarks-list">
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Muir_Woods" target="_blank" rel="noopener noreferrer">🌲 Muir Woods</a></strong>
+                                    <p>Muir Woods is a beautiful forest of redwood trees, located in the heart of the San Francisco Bay Area.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Mount_Tamalpais" target="_blank" rel="noopener noreferrer">⛰️ Mount Tamalpais</a></strong>
+                                    <p>Scenic mountain near Muir Woods, offering panoramic views of the Bay Area and lush hiking trails.</p>
+                                </li>
+                                <li>
+                                    <strong><a href="https://en.wikipedia.org/wiki/Panoramic_Highway" target="_blank" rel="noopener noreferrer">🛣️ Panoramic Highway</a></strong>
+                                    <p>Famous winding mountain road with spectacular scenic overlooks of the coastline and redwoods, great for running adventures.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+     
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Experience San Francisco like never before</p>
+                <div class="cta-buttons">
+                    <button class="cta-button">Book Your Tour</button>
+                    <button class="waiver-button" id="waiverButton">View Liability Waiver</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 San Francisco Jogging Tours. All rights reserved.</p>
+            <p class="editors">Created by Angus
+            </p>
+            <div class="footer-links">
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="contact.html" class="footer-link">Contact Us</a>
+                <button class="waiver-link" id="waiverLink">Liability Waiver</button>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Liability Waiver Modal -->
+    <div class="waiver-modal" id="waiverModal">
+        <div class="waiver-modal-content">
+            <span class="waiver-close" id="waiverClose">&times;</span>
+            <h2>Liability Waiver</h2>
+            <div class="waiver-text">
+                <p><strong>San Francisco Jogging Tours - Release and Waiver of Liability</strong></p>
+                <p><strong>Date:</strong> <span id="waiverDate"></span></p>
+                
+                <p>I understand that participating in jogging/running tours involves inherent risks including, but not limited to, the risk of physical injury, death, or property damage. I acknowledge that I am voluntarily participating in these activities and assume all risks associated with such participation.</p>
+                
+                <p>I hereby release, waive, discharge, and covenant not to sue San Francisco Jogging Tours, its owners, employees, agents, contractors, and representatives (collectively, the "Released Parties") from any and all liability, claims, demands, actions, and causes of action whatsoever, arising out of or related to any loss, damage, or injury, including death, that may be sustained by me, or to any property belonging to me, while participating in or as a result of participation in the jogging/running tours.</p>
+                
+                <p>I understand that:</p>
+                <ul>
+                    <li>Running/jogging involves physical exertion and may cause injury</li>
+                    <li>I should consult a physician before beginning any exercise program</li>
+                    <li>I am responsible for my own safety and well-being</li>
+                    <li>Weather conditions and terrain may vary and create hazards</li>
+                    <li>I should follow all safety instructions provided by tour guides</li>
+                </ul>
+                
+                <p>I agree to indemnify and hold harmless the Released Parties from any loss, liability, damage, or cost they may incur due to my participation in the tours.</p>
+                
+                <p>By clicking "I Agree" below, I acknowledge that I have read and understood this waiver, and I voluntarily agree to its terms.</p>
+            </div>
+            <div class="waiver-actions">
+                <button class="waiver-agree" id="waiverAgree">I Agree</button>
+                <button class="waiver-decline" id="waiverDecline">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbotWidget">
+        <div class="chatbot-toggle" id="chatbotToggle">
+            <span class="chatbot-icon">💬</span>
+            <span class="chatbot-toggle-text">Chat with us</span>
+        </div>
+        <div class="chatbot-container" id="chatbotContainer">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <span class="chatbot-header-icon">🤖</span>
+                    <div>
+                        <h3>Tour Assistant</h3>
+                        <p class="chatbot-status">Online</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" id="chatbotClose">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-message bot-message">
+                    <div class="message-content">
+                        <p>Hi! I'm your tour assistant. I can help you:</p>
+                        <ul>
+                            <li>📅 Check available tour times</li>
+                            <li>📍 Learn about our routes</li>
+                            <li>❓ Answer questions about our tours</li>
+                        </ul>
+                        <p>How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message..." autocomplete="off">
+                <button class="chatbot-send" id="chatbotSend">
+                    <span>Send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>
