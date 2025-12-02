@@ -1,0 +1,22 @@
+Title: San Francisco Jogging Tours
+TitleBackgroundImage: golden-gate-bridge.jpg
+BackgroundColor: grey
+Language: en-US
+RainEffect:
+  enabled: true
+  intensity: low
+Editor:
+  - Angus
+
+RunningRoutes:
+  - name: Golden Gate Bridge Loop
+    averageElapsedTime: 45 minutes
+  - name: Crissy Field to Fort Point
+    averageElapsedTime: 30 minutes
+  - name: Marina Green to Palace of Fine Arts
+    averageElapsedTime: 25 minutes
+  - name: Presidio Coastal Trail
+    averageElapsedTime: 60 minutes
+  - name: Embarcadero Waterfront
+    averageElapsedTime: 40 minutes
+
